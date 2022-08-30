@@ -98,48 +98,50 @@ class _LoginScreenState extends State<LoginScreen> {
                                         child: Text('EMAIL',style:GoogleFonts.lato(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black54,
-                                            fontSize: 18
+                                            fontSize: 14
                                         ))),
                                     subtitle: Container(
-                                      child: TextFormField(
+                                      child: SizedBox(
+                                        child: TextFormField(
 
-                                        style: TextStyle(fontSize: 18,
-                                            height:1
+                                          style: TextStyle(fontSize: 18,
+                                              height:1
+                                          ),
+                                          keyboardType: TextInputType.emailAddress,
+                                          controller: _LoginEmailController,
+                                          decoration: InputDecoration(
+                                              isDense: true,
+                                              border:OutlineInputBorder(
+
+                                                  borderSide: BorderSide(
+                                                      width: 2,
+                                                      style:BorderStyle.solid ,
+                                                      color: Colors.black87
+                                                  ),
+                                                  borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              contentPadding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                                              hintText: 'Email',
+                                              hintStyle: TextStyle(color: Colors.black26,fontWeight: FontWeight.w800,fontSize: 13)
+                                            //S.of(context).name,
+                                          ),
+                                          textInputAction: TextInputAction.next,
+                                          onEditingComplete: () => node.nextFocus(),
+
+                                          validator: (result) {
+                                            if (result!.isEmpty) {
+                                              return 'Email Address is Required'; //S.of(context).nameIsRequired;
+                                            }
+                                            if (!_validateEmailStructure(result))
+                                              return 'Must write an email address';
+                                            return null;
+                                          },
                                         ),
-                                        keyboardType: TextInputType.emailAddress,
-                                        controller: _LoginEmailController,
-                                        decoration: InputDecoration(
-                                            isDense: true,
-                                            border:OutlineInputBorder(
-
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    style:BorderStyle.solid ,
-                                                    color: Colors.black87
-                                                ),
-                                                borderRadius: BorderRadius.circular(10)
-                                            ),
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-                                            hintText: 'Email',
-                                            hintStyle: TextStyle(color: Colors.black26,fontWeight: FontWeight.w800,fontSize: 13)
-                                          //S.of(context).name,
-                                        ),
-                                        textInputAction: TextInputAction.next,
-                                        onEditingComplete: () => node.nextFocus(),
-
-                                        validator: (result) {
-                                          if (result!.isEmpty) {
-                                            return 'Email Address is Required'; //S.of(context).nameIsRequired;
-                                          }
-                                          if (!_validateEmailStructure(result))
-                                            return 'Must write an email address';
-                                          return null;
-                                        },
                                       ),
                                     )),
                               ),
                               SizedBox(
-                                height: 8,
+                                height:3,
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -152,64 +154,73 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Text('PASSWORD',style:GoogleFonts.lato(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black54,
-                                          fontSize: 18
+                                          fontSize: 14
                                       ))),
                                   subtitle: BlocBuilder<PasswordHiddinCubit,
                                       PasswordHiddinCubitState>(
                                     bloc: cubit,
                                     builder: (context, state) {
-                                      return TextFormField(
-                                        controller: _LoginPasswordController,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            height: 1
+                                      return SizedBox(
+                                        child: TextFormField(
+                                          controller: _LoginPasswordController,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              height: 1
+                                          ),
+                                          decoration: InputDecoration(
+                                              isDense: true,
+                                              errorStyle: GoogleFonts.lato(
+                                                color: Colors.red.shade700,
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                              contentPadding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                                              suffixIconConstraints: BoxConstraints(
+                                                minHeight: 20,
+
+                                              ),
+                                              suffixIcon: SizedBox(
+                                                height: 2,
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      cubit.changeState();
+                                                    },
+                                                    icon: state ==
+                                                        PasswordHiddinCubitState
+                                                            .VISIBILITY
+                                                        ? Icon(Icons.visibility)
+                                                        : Icon(Icons.visibility_off)),
+                                              ),
+                                              border:OutlineInputBorder(
+
+                                                  borderSide: BorderSide(
+                                                      width: 2,
+                                                      style:BorderStyle.solid ,
+                                                      color: Colors.black87
+                                                  ),
+                                                  borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              hintText: 'Password',
+                                              hintStyle: TextStyle(color: Colors.black26,fontWeight: FontWeight.w800,fontSize: 13)
+                                          ),
+                                          obscureText:
+                                          state == PasswordHiddinCubitState.VISIBILITY
+                                              ? false
+                                              : true,
+
+                                          textInputAction: TextInputAction.done,
+                                          onFieldSubmitted: (v) => node.unfocus(),
+                                          // Move focus to next
+                                          validator: (result) {
+                                            if (result!.isEmpty) {
+                                              return '* Password is Required'; //S.of(context).emailAddressIsRequired;
+                                            }
+                                            if (result.length < 8) {
+                                              return '* The password is short, it must be 8 characters long'; //S.of(context).emailAddressIsRequired;
+                                            }
+
+                                            return null;
+                                          },
                                         ),
-                                        decoration: InputDecoration(
-                                            isDense: true,
-                                            errorStyle: GoogleFonts.lato(
-                                              color: Colors.red.shade700,
-                                              fontWeight: FontWeight.w800,
-                                            ),
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                                            suffixIcon: IconButton(
-                                                onPressed: () {
-                                                  cubit.changeState();
-                                                },
-                                                icon: state ==
-                                                    PasswordHiddinCubitState
-                                                        .VISIBILITY
-                                                    ? Icon(Icons.visibility)
-                                                    : Icon(Icons.visibility_off)),
-                                            border:OutlineInputBorder(
-
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    style:BorderStyle.solid ,
-                                                    color: Colors.black87
-                                                ),
-                                                borderRadius: BorderRadius.circular(10)
-                                            ),
-                                            hintText: 'Password',
-                                            hintStyle: TextStyle(color: Colors.black26,fontWeight: FontWeight.w800,fontSize: 13)
-                                        ),
-                                        obscureText:
-                                        state == PasswordHiddinCubitState.VISIBILITY
-                                            ? false
-                                            : true,
-
-                                        textInputAction: TextInputAction.done,
-                                        onFieldSubmitted: (v) => node.unfocus(),
-                                        // Move focus to next
-                                        validator: (result) {
-                                          if (result!.isEmpty) {
-                                            return '* Password is Required'; //S.of(context).emailAddressIsRequired;
-                                          }
-                                          if (result.length < 8) {
-                                            return '* The password is short, it must be 8 characters long'; //S.of(context).emailAddressIsRequired;
-                                          }
-
-                                          return null;
-                                        },
                                       );
                                     },
                                   ),
@@ -233,13 +244,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                         style: GoogleFonts.lato(
                                           fontWeight: FontWeight.w800,
                                           color: Colors.black54,
-                                          fontSize:15,
+                                          fontSize:11,
                                         )),
                                   ),
                                 ),
                               ),
                               SizedBox(
-                                height:20,
+                                height:15,
                               ),
                               BlocConsumer<LoginBloc, LoginStates>(
                                   bloc: widget._loginBloc,
@@ -268,7 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       return ListTile(
                                         title: Container(
                                           margin: EdgeInsets.symmetric(horizontal: 50),
-                                          height:60,
+                                          height:55,
                                           clipBehavior: Clip.antiAlias,
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(10)),
@@ -297,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize:
-                                                        17,
+                                                        15,
                                                         fontWeight: FontWeight.w700))),
                                           ),
                                         ),

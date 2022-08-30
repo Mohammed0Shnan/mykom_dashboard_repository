@@ -20,8 +20,7 @@ class AdvertisementModel{
   }
 
   AdvertisementModel.fromJson(Map<String, dynamic> data){
-    print('******************* from json ***********');
-    print(data);
+
     this.id = data['id'];
     this.imageUrl= data['image_url'];
     this.storeID= data['storeID'];

@@ -26,35 +26,6 @@ class StatisticsBloc extends Bloc<StatisticsEvent,StatisticsStates>{
         emit(StatisticsMonthlySuccessState(statistics: event.statistics,message: null));
 
       }
-
-
-      // else if (event is CaptainOrderDeletedSuccessEvent){
-      //   if(this.state is CaptainOrdersListSuccessState)
-      //     {
-      //       print(event.orderID);
-      //       print('------------------');
-      //      List<OrderModel> state = (this.state as  CaptainOrdersListSuccessState ).data;
-      //      state.forEach((element) {
-      //        print(element.id);
-      //      }); print('=============================================');
-      //       List<OrderModel> list =[];
-      //       state.forEach((element) {
-      //         if(element.id != event.orderID)
-      //           list.add(element);
-      //       });
-      //
-      //       print(list);
-      //       emit(CaptainOrdersListSuccessState(data:list,message:'success'));
-      //     }
-      //
-      //   else
-      //   {
-      //     emit(CaptainOrderDeletedErrorState(message: 'Success, Refresh!!!',data:List.from(List.from( (this.state as  CaptainOrdersListSuccessState ).data) )));
-      //   }
-      // }
-      // else if(event is CaptainOrderDeletedErrorEvent){
-      //   emit(CaptainOrderDeletedErrorState(message: 'Error',data:List.from(List.from( (this.state as  CaptainOrdersListSuccessState ).data) )));
-      // }
     });
   }
 

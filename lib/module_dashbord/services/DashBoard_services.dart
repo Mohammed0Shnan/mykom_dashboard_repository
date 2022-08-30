@@ -2,6 +2,7 @@
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -99,7 +100,16 @@ class DashBoardService{
 
   }
 
+  Future<List<AdvertisementModel>?> getAdvertisementsStore(String storeID) async {
 
+     return _firestore.collection('advertisements').where('storeID',isEqualTo: storeID).get().then((value) =>
+         value.docs.map((doc) {
+           Map<String , dynamic> _m = doc.data() as Map<String , dynamic>;
+           _m['id']= doc.id;
+         return  AdvertisementModel.fromJson(_m);}).toList()
+     ).catchError((e)=> null);
+
+  }
   Future<bool> addCompanyToStore(String storeId, AddCompanyRequest request)async {
     try{
       request.storeId = storeId;
@@ -149,41 +159,7 @@ class DashBoardService{
 
 
       });
-     //  print('ssssssssssssssssssssss');
-     //
-     //  /// company detail
-     // _firestore.collection('stores').doc(storeId).collection('companies').snapshots().listen((event) async{
-     //   List< Map <String, dynamic>> map2 =   < Map <String, dynamic>>[];
-     //   for (int i = 0; i < event.docs.length; i++) {
-     //     List< Map <String, dynamic>> products =   < Map <String, dynamic>>[];
-     //     QueryDocumentSnapshot element2 = event.docs[i];
-     //     Map <String, dynamic> compa = element2.data() as Map<String, dynamic>;
-     //    await _firestore.collection('stores').doc(storeId).collection('companies').doc(element2.id).
-     //     map2.add(m);
-     //   }
-     //
-     //   map['companies'] = map2;
-     //  });
-     //  print('22222222222222222222222222');
-     //
-     //  print('###############################');
-     //
-     //
-     //
-     //  print(map);
-     //  /// products detail
-     //  // await  _firestore.collection('stores').doc(storeId).collection('companies').snapshots().forEach((element) {
-     //  //   List< Map <String, dynamic>> map2 =   < Map <String, dynamic>>[];
-     //  //
-     //  //   for (int i = 0; i < element.docs.length; i++) {
-     //  //     QueryDocumentSnapshot element2 = element.docs[i];
-     //  //     Map <String, dynamic> m = element2.data() as Map<String, dynamic>;
-     //  //     map2.add(m);
-     //  //   }
-     //  //   map['companies'] = map2;
-     //  // });
 
-      return null;
     }catch(e){
       return null;
     }
@@ -858,6 +834,18 @@ class DashBoardService{
 
     });
   }
+
+ Future<bool> deleteAdvertisementsFromStore(String id,) async{
+    return _firestore.collection('advertisements').doc(id).get().then((value) {
+      String imageUrl = value.data()!['image_url'];
+      _firestore.runTransaction((Transaction tx) async {
+      await  _firestore.collection('advertisements').doc(id).delete().then((value) => true).catchError((e)=>false);
+        await FirebaseStorage.instance.refFromURL(imageUrl).delete();
+      });
+      return true;
+    }).catchError((e)=> false);
+
+ }
 
 
 
