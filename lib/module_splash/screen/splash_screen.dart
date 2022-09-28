@@ -91,8 +91,10 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       // Is LoggedIn
       UserRole? role = await widget._authService.userRole;
+      print('***************************');
       if (role != null) {
         if (role == UserRole.ROLE_OWNER) {
+          print('splash  owner role ====================================');
           return DashboardRoutes.DASHBOARD_SCREEN;
         } else {
           return AuthorizationRoutes.LOGIN_SCREEN;

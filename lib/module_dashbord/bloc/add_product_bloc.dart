@@ -47,6 +47,10 @@ class AddProductBloc extends Bloc<AddProductEvent, AddProductStates> {
     });
   }
 
+  Future<bool> deleteProduct(String id)async {
+   return   await _service.deleteProductFromCompany(id);
+  }
+
 
 }
 

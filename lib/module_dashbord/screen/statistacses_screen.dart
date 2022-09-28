@@ -42,6 +42,15 @@ class _StatistacsesScreenState extends State<StatistacsesScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(MediaQuery.of(context).size);
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black87),
+        title: Text('DashBoard',style: TextStyle(color: Colors.black54,fontSize: 22,fontWeight: FontWeight.bold),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: false,
+        automaticallyImplyLeading: false,
+      ),
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(32.0),

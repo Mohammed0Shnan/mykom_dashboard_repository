@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: SizeConfig.screenHeight * 0.1,),
                 Container(
                   height:  SizeConfig.screenHeight * 0.3,
-                  width:  SizeConfig.screenWidth * 0.3,
+                  width:  SizeConfig.screenWidth * 0.4,
                   padding: EdgeInsets.symmetric(horizontal: 32),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -88,23 +88,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              SizedBox(height: 16,),
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: ListTile(
-                                    title: Padding(
-                                        padding: EdgeInsets.only(bottom: 8),
-                                        child: Text('EMAIL',style:GoogleFonts.lato(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black54,
-                                            fontSize: 14
-                                        ))),
+
                                     subtitle: Container(
                                       child: SizedBox(
                                         child: TextFormField(
 
-                                          style: TextStyle(fontSize: 18,
+                                          style: TextStyle(fontSize: 12 ,
                                               height:1
                                           ),
                                           keyboardType: TextInputType.emailAddress,
@@ -141,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     )),
                               ),
                               SizedBox(
-                                height:3,
+                                height:5,
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -149,13 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 ),
                                 child: ListTile(
-                                  title: Padding(
-                                      padding: EdgeInsets.only(bottom: 8),
-                                      child: Text('PASSWORD',style:GoogleFonts.lato(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black54,
-                                          fontSize: 14
-                                      ))),
+
+
                                   subtitle: BlocBuilder<PasswordHiddinCubit,
                                       PasswordHiddinCubitState>(
                                     bloc: cubit,

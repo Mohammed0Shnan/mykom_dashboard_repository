@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:my_kom_dist_dashboard/module_authorization/screens/widgets/top_snack_bar_widgets.dart';
@@ -385,7 +386,7 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height : 10,),
 
             Text('New Price (Discount)'),
 
@@ -396,8 +397,10 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                 decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 12),
-                    border: OutlineInputBorder()
+                    border: OutlineInputBorder(),
+                hintText: 'Write (null) that you delete the discount'
                 ),
+
               ),
             ),
             SizedBox(height: 10,),
@@ -472,8 +475,11 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                     int _quantity =int.parse( _productQuantityController.text.trim());
                     double _curentPrice =double.parse( _productPriceController.text.trim());
                     double? _newPrice = null;
-
+                    if(_productNewPriceController.text.trim() == 'null'){
+                      _newPrice = 0.0;
+                    }else
                       _newPrice = double.parse(_productNewPriceController.text.trim());
+
                       if(_newPrice == 0.0){
 
                         _newPrice = null;
@@ -496,6 +502,38 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                   ),
                 );
               }
+            ),
+            SizedBox(height: 20,),
+            BlocConsumer<AddProductBloc, AddProductStates>(
+                bloc: _addProductBloc,
+                listener: (context,state){
+                },
+                builder: (context,state) {
+
+                  return GestureDetector(
+                    onTap: () async{
+                      EasyLoading.show();
+                      _addProductBloc.deleteProduct(item.id).then((value) {
+                        if(value){
+                          EasyLoading.showSuccess('Success Deleted');
+
+                          Navigator.pop(context);
+                        }else{
+                          EasyLoading.showError('Error in Delete Product');
+                        }
+                      });
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(child: Text('Delete',style: TextStyle(color: Colors.red,fontWeight: FontWeight.w600,fontSize: 20),)),
+                    ),
+                  );
+                }
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,6 @@ import 'package:my_kom_dist_dashboard/module_authorization/bloc/register_bloc.da
 import 'package:my_kom_dist_dashboard/module_authorization/enums/user_role.dart';
 import 'package:my_kom_dist_dashboard/module_authorization/requests/register_request.dart';
 import 'package:my_kom_dist_dashboard/module_authorization/screens/login_automatically.dart';
-import 'package:my_kom_dist_dashboard/module_authorization/screens/phone_code_sent_screen.dart';
 import 'package:my_kom_dist_dashboard/module_authorization/screens/widgets/top_snack_bar_widgets.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/all_store_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/store_model.dart';
@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _registerUserNameController =
       TextEditingController();
   final TextEditingController _registerAddressController =
-      TextEditingController();
+      TextEditingController(text: 'The site has been selected successfully');
   final TextEditingController _registerPhoneNumberController =
       TextEditingController();
 
@@ -708,7 +708,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-
+                                if(userRole == UserRole.ROLE_DELIVERY)
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
@@ -856,9 +856,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       255, 28, 174, 147),
                                                 ),
                                                 onPressed: () {
+                                                  if(userRole == UserRole.ROLE_OWNER)
+                                                    {
+                                                      _storeID = '';
+                                                    }
                                                   if (_registerCompleteFormKey
                                                       .currentState!
                                                       .validate() && _storeID !=null) {
+
+                                                    AddressModel _fakeAddress = AddressModel(description: 'fake des', latitude: 0.0000, longitude: 0.0000, geoData: {});
                                                     String name =
                                                         _registerUserNameController
                                                             .text
@@ -872,7 +878,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                         ProfileRequest(
                                                             userName: name,
                                                             address:
-                                                                addressModel,
+                                                            _fakeAddress,
                                                             phone: phone,
                                                         storeId: _storeID!
                                                         );

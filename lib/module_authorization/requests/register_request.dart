@@ -46,7 +46,11 @@ class ProfileRequest {
     Map<String, dynamic> map = {};
     map['userName'] = this.userName;
     map['phone'] = this.phone;
-    map['store_id'] = this.storeId;
+
+    if(map['store_id'] != ''){
+      map['store_id'] = this.storeId;
+    }
+
     map['address'] = this.address.toJson();
 
     return map;

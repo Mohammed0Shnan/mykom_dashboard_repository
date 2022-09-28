@@ -80,6 +80,19 @@ class DashBoardService{
 
   }
 
+  Future<bool> deleteProductFromCompany(String id)async{
+
+    try{
+    await  _firestore.collection('products').doc(id).delete();
+    return true;
+    }catch(e){
+      return false;
+    }
+
+  }
+
+
+
   Future<void> getAllStores() async {
     try{
       _firestore.collection('stores').snapshots().listen((event) async {
@@ -233,7 +246,7 @@ class DashBoardService{
       
         Map <String, dynamic> u = element2.data() as Map<String, dynamic>;
         u['id'] = element2.id;
-        if(u['email'] != 'deleted_account'){
+        if(u['email'] != 'deleted_account' && u['userName'] != null){
           AppUser appUser = AppUser.fromJsom(u);
 
           if (appUser.userRole == UserRole.ROLE_DELIVERY) {

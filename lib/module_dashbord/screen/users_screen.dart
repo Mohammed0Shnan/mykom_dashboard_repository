@@ -478,7 +478,7 @@ Navigator.pushNamed(context, AuthorizationRoutes.REGISTER_SCREEN,arguments: User
                                         Icon(Icons.location_on_outlined,size: 18,),
                                         SizedBox(width: 8,),
                                         Container(
-                                          width: SizeConfig.screenWidth * 0.6,
+                                      //    width: SizeConfig.screenWidth * 0.6,
                                           child: Text(users[index].address.description.toString(),overflow: TextOverflow.ellipsis,style: GoogleFonts.lato(
                                             fontSize: 14,
                                             color: Colors.black45,

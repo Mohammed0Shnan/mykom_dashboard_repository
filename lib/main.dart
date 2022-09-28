@@ -29,7 +29,6 @@ void main() async {
       appId: "1:686046357650:web:7b9358804ef56237685e4b",
       measurementId: "G-EMWBX8R71F"
     )
-
   );
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   final container = await AppComponent.create();
