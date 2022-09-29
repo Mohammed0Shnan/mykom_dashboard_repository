@@ -2,6 +2,7 @@
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,6 +19,7 @@ import 'package:my_kom_dist_dashboard/module_dashbord/models/store_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/zone_models.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_company_request.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_product_request.dart';
+import 'package:my_kom_dist_dashboard/module_dashbord/requests/update_company_request.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/requests/update_product_request.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/response/company_store_detail_response.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/response/store_detail_response.dart';
@@ -80,10 +82,15 @@ class DashBoardService{
 
   }
 
-  Future<bool> deleteProductFromCompany(String id)async{
+  Future<bool> deleteProductFromCompany(String id , String imageUrl)async{
 
     try{
     await  _firestore.collection('products').doc(id).delete();
+    /// remove product image from storage
+
+    FirebaseStorage.instance.refFromURL(imageUrl).delete().catchError((e){
+
+    }).onError((error, stackTrace) => {});
     return true;
     }catch(e){
       return false;
@@ -198,7 +205,7 @@ class DashBoardService{
           CompanyStoreDetailResponse res = CompanyStoreDetailResponse.fromJsom(
               map);
           CompanyModel companyModel = CompanyModel(
-              id: res.id, name: res.name, imageUrl: res.imageUrl,description:res.description );
+              id: res.id, name: res.name, imageUrl: res.imageUrl,description:res.description,name2: res.name2 );
           companyModel.storeId = res.storeId;
           companyModel.available = res.is_active;
           companyList.add(companyModel);
@@ -631,7 +638,7 @@ class DashBoardService{
     CompanyModel c =  await _firestore.collection('companies').doc(id).get().then((value) {
       Map <String, dynamic> map = value.data() as Map<String, dynamic>;
       map['id'] = value.id;
-      CompanyModel model =CompanyModel(id:  map['id'], name: map['name'], imageUrl:map['imageUrl'], description: '');
+      CompanyModel model =CompanyModel(id:  map['id'], name: map['name'], imageUrl:map['imageUrl'], description: '',name2: map['name2']);
       return model;
       });
     return c;
@@ -724,6 +731,42 @@ class DashBoardService{
       return false;
     }
   }
+  Future<bool> deleteCompanyById({required String companyId })async {
+    try{
+      List<String> _ImagesUrls = [];
+      var batch = _firestore.batch();
+      var group0Ref  =await _firestore.collection("products").where('company_id',isEqualTo: companyId).get();
+
+      group0Ref.docs.forEach((element) {
+        batch.delete(element.reference);
+        _ImagesUrls.add(element.data()['imageUrl']);
+      });
+
+      var group1Ref =await _firestore.collection("companies").doc(companyId).get();
+      batch.delete(group1Ref.reference);
+
+      await batch.commit();
+
+      /// remove company image from storage
+      String _companyImage = group1Ref.data()!['imageUrl'];
+       FirebaseStorage.instance.refFromURL(_companyImage).delete().catchError((e){
+
+       }).onError((error, stackTrace) => {});
+
+      /// remove products images from storage
+      _ImagesUrls.forEach((element) {
+        FirebaseStorage.instance.refFromURL(element).delete().catchError((e){
+
+        }).onError((error, stackTrace) => {});
+      });
+
+
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
 
  Future<bool> updateProductConpany(String productID,UpdateProductRequest request)async {
    try{
@@ -858,6 +901,14 @@ class DashBoardService{
       return true;
     }).catchError((e)=> false);
 
+ }
+
+ Future<bool> updateCompany(String id, CompanyRequest updateRequest) async{
+    try{
+    await  _firestore.collection('companies').doc(id).update(updateRequest.toJson());
+    return true;
+
+    }catch(e){return  false;}
  }
 
 

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_kom_dist_dashboard/consts/colors.dart';
 import 'package:my_kom_dist_dashboard/module_authorization/screens/widgets/top_snack_bar_widgets.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/bloc/add_company1_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/add_product_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/all_store_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/company_store_bloc.dart';
@@ -13,12 +12,10 @@ import 'package:my_kom_dist_dashboard/module_dashbord/enum/image_type.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/company_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/store_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/zone_models.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_company_request.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_product_request.dart';
 import 'package:my_kom_dist_dashboard/module_map/models/address_model.dart';
 import 'package:my_kom_dist_dashboard/module_upload/upload_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_upload/widgets/choose_photo_source_dialog.dart';
-import 'package:my_kom_dist_dashboard/utils/size_configration/size_config.dart';
 
 class AddProductsScreen extends StatefulWidget {
   const AddProductsScreen({Key? key}) : super(key: key);

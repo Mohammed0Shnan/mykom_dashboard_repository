@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:my_kom_dist_dashboard/consts/colors.dart';
 import 'package:my_kom_dist_dashboard/module_authorization/screens/widgets/top_snack_bar_widgets.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/add_zone_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/store_advertisements_bloc.dart';
@@ -15,7 +14,6 @@ import 'package:my_kom_dist_dashboard/module_dashbord/models/advertisement_model
 import 'package:my_kom_dist_dashboard/module_dashbord/models/company_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/store_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/screen/company_detail_screen.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/screen/statistacses_screen.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/screen/store_statistacses_screen.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/widgets/add_zone_widget.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/widgets/delete_areart_widget.dart';
@@ -311,19 +309,50 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                                           ),
                                           SizedBox(height: 8,),
                                           Expanded(child: Text(list[index].name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black54),)),
-                                          GestureDetector(
-                                            onTap: (){
-                                              deleteCheckAlertWidget(maincontext, function: (){
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                flex:1,
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    deleteCheckAlertWidget(maincontext, function: (){
 
-                                                _storeCompanyDetailBloc.updateCompanyState(list[index].id,list[index].available?false:true);
-                                              }, message:(list[index].available)? 'Do you want to deactivate this company?':'Do you want to activate this company?');
-                                            },
-                                            child: Container(
-                                              height: 30,
-                                              width: 80,
-                                              color: (list[index].available?Colors.green:Colors.red),
-                                              child: Center(child: Text(list[index].available?'Available':'Not Available',textAlign: TextAlign.center,style: TextStyle(color: Colors.white),)),
-                                            ),
+                                                      _storeCompanyDetailBloc.updateCompanyState(list[index].id,list[index].available?false:true);
+                                                    }, message:(list[index].available)? 'Do you want to deactivate this company?':'Do you want to activate this company?');
+                                                  },
+                                                  child: Container(
+                                                    height: 30,
+                                                    width: 80,
+                                                    color: (list[index].available?Colors.green:Colors.red),
+                                                    child: Center(child: Text(list[index].available?'Available':'Not Available',textAlign: TextAlign.center,style: TextStyle(color: Colors.white),)),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex:1,
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    deleteCheckAlertWidget(maincontext, function: (){
+
+                                                      _storeCompanyDetailBloc.deleteCompany(list[index].id);
+                                                    }, message: 'Do you want to delete this company?');
+                                                  },
+                                                  child: Container(
+                                                    height: 30,
+                                                    width: 80,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+
+                                                        border: Border.all(
+                                                        color: Colors.red,
+                                                        width: 2
+                                                      )
+                                                    ),
+                                                    child: Center(child: Text('Delete',textAlign: TextAlign.center,style: TextStyle(color: Colors.red),)),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           )
                                         ],
                                       )),

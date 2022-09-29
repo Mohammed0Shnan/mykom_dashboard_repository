@@ -13,14 +13,14 @@ class UpdateProductRequest {
   late final int quantity;
   late String imageUrl;
 
-  UpdateProductRequest({required this.name, required this.description,required this.quantity,required this.current_price,required this.arabicName,required this.arabicDis,required this.discount_price});
+  UpdateProductRequest({required this.name, required this.imageUrl,required this.description,required this.quantity,required this.current_price,required this.arabicName,required this.arabicDis,required this.discount_price});
 
 
   Map<String, dynamic>? toJson() {
     Map<String, dynamic> map = {};
     map['title'] = this.name;
     map['title2'] = this.arabicName;
-   // map['imageUrl'] = this.imageUrl;
+    map['imageUrl'] = this.imageUrl;
     map['description'] = this.description;
     map['description2'] = this.arabicDis;
     map['quantity'] = this.quantity;

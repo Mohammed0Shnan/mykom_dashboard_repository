@@ -129,14 +129,14 @@ class _StatistacsesScreenState extends State<StatistacsesScreen> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('Day : '+state.statistics[index].index.toString() +' ( '+DateFormat('yyyy-MM-dd').format(state.statistics[index].dateTime)+' )',
-                                    style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.8,fontWeight: FontWeight.w700),)
+                                    style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.6,fontWeight: FontWeight.w700),)
                                    , Row(
                                      children: [
                                        Text('Sales : ' ,
-                                          style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.8,fontWeight: FontWeight.w700),),
+                                          style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.6,fontWeight: FontWeight.w700),),
 
                                        Text(state.statistics[index].revenue.toString() ,
-                                         style: TextStyle(color: ColorsConst.mainColor,fontSize: SizeConfig.widhtMulti *0.8,fontWeight: FontWeight.w700),),
+                                         style: TextStyle(color: ColorsConst.mainColor,fontSize: SizeConfig.widhtMulti *0.6,fontWeight: FontWeight.w700),),
 
                                      ],
                                    )
@@ -261,14 +261,14 @@ class _StatistacsesScreenState extends State<StatistacsesScreen> {
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         Text('${state.statistics.keys.elementAt(index)} : ' +' ( '+DateFormat('yyyy-MM').format(state.statistics[state.statistics.keys.elementAt(index)]!.dateTime )+' )',
-                                                          style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.8,fontWeight: FontWeight.w700),)
+                                                          style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.6,fontWeight: FontWeight.w700),)
                                                         , Row(
                                                           children: [
                                                             Text('Sales : ' ,
-                                                              style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.8,fontWeight: FontWeight.w700),),
+                                                              style: TextStyle(color: Colors.black54,fontSize:SizeConfig.widhtMulti *0.6,fontWeight: FontWeight.w700),),
 
                                                             Text(state.statistics[state.statistics.keys.elementAt(index)]!.revenue.toString() ,
-                                                              style: TextStyle(color: ColorsConst.mainColor,fontSize: SizeConfig.widhtMulti *0.8,fontWeight: FontWeight.w700),),
+                                                              style: TextStyle(color: ColorsConst.mainColor,fontSize: SizeConfig.widhtMulti *0.6,fontWeight: FontWeight.w700),),
 
                                                           ],
                                                         )

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_kom_dist_dashboard/consts/colors.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/all_store_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/store_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/screen/store_detail_screen.dart';
-import 'package:my_kom_dist_dashboard/utils/size_configration/size_config.dart';
 
 class AllStoreScreen extends StatefulWidget {
   const AllStoreScreen({Key? key}) : super(key: key);

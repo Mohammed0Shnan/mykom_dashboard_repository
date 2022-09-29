@@ -136,10 +136,10 @@ class OrderRepository {
     try{
       if(filter == null)
       return  _firestore.collection('orders').orderBy("customer_order_id",descending: true)
-          .limit(5).snapshots();
+          .limit(20).snapshots();
       else
         return  _firestore.collection('orders').where('status',isEqualTo: filter.name).orderBy("customer_order_id",descending: true)
-            .limit(5).snapshots(); 
+            .limit(20).snapshots();
     }catch(e){
       throw Exception('Error in get data !');
     }
@@ -151,10 +151,10 @@ class OrderRepository {
       if(filter == null)
 
         return  _firestore.collection('orders').orderBy("customer_order_id",descending: true)
-            .limit(2) .startAfterDocument(documentList).snapshots();
+            .limit(10) .startAfterDocument(documentList).snapshots();
       else
         return  _firestore.collection('orders').where('status',isEqualTo: filter!.name).orderBy("customer_order_id",descending: true)
-            .limit(2) .startAfterDocument(documentList).snapshots();
+            .limit(10) .startAfterDocument(documentList).snapshots();
 
 
     }catch(e){

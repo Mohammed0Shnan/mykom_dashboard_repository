@@ -46,6 +46,7 @@ import 'package:my_kom_dist_dashboard/consts/colors.dart';
                 ),
                 child: MaterialButton(
                   onPressed: (){
+
                   function();
                   Navigator.pop(context);
                   },

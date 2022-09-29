@@ -87,7 +87,7 @@ class CompanyService {
           CompanyStoreDetailResponse res = CompanyStoreDetailResponse.fromJsom(
               map);
           CompanyModel companyModel = CompanyModel(
-              id: res.id, name: res.name, imageUrl: res.imageUrl,description:res.description );
+              id: res.id, name: res.name, imageUrl: res.imageUrl,description:res.description , name2: res.name2 );
           companyModel.storeId = res.storeId;
           companyList.add(companyModel);
         });
@@ -203,6 +203,21 @@ class CompanyService {
   }
 
   void getCompanyStore(String storeId) {}
+
+  Future<CompanyModel?> getCompanyByID(String companyID) async{
+   try{
+  return  await  _firestore.collection('companies').doc(companyID).get().then((value) {
+       Map<String ,dynamic> _rawData = value.data() as Map<String , dynamic>;
+       _rawData['id'] = value.id;
+       CompanyStoreDetailResponse _result = CompanyStoreDetailResponse.fromJsom(_rawData);
+       CompanyModel _copmpanyModle = CompanyModel(id: _result.id, name: _result.name, name2: _result.name2, imageUrl: _result.imageUrl, description: _result.description);
+       return _copmpanyModle;
+     });
+   }catch(e){
+     return null;
+   }
+
+  }
 
 
 

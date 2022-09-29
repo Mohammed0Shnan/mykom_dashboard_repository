@@ -23,14 +23,14 @@ import 'package:my_kom_dist_dashboard/module_upload/upload_bloc.dart';
                   size: 50,
                 ),
                 onPressed: () async {
-                  String pickedImage =
-                      await _servce.getImageFromGallery(ImageSource.camera);
-                  if (pickedImage != null) {
-
-                    // _bloc.upload(pickedImage);
-                    // Navigator.of(maincontext).pop();
-
-                  }
+                  // String pickedImage =
+                  //     await _servce.getImageFromGallery(ImageSource.camera);
+                  // if (pickedImage != null) {
+                  //
+                  //   // _bloc.upload(pickedImage);
+                  //   // Navigator.of(maincontext).pop();
+                  //
+                  // }
                 },
               ),
               padding: EdgeInsets.only(left: size.width * 0.15),
@@ -43,9 +43,9 @@ import 'package:my_kom_dist_dashboard/module_upload/upload_bloc.dart';
                   size: 50,
                 ),
                 onPressed: () async {
-                  String pickedImage =
-                      await _servce.getImageFromGallery(ImageSource.gallery);
-                  if (pickedImage != null) {
+                  // String pickedImage =
+                  //     await _servce.getImageFromGallery(ImageSource.gallery);
+                 // if (pickedImage != null) {
                     //
                     // _bloc.upload(pickedImage);
                     // Navigator.of(maincontext).pop();
@@ -58,9 +58,9 @@ import 'package:my_kom_dist_dashboard/module_upload/upload_bloc.dart';
                       Navigator.of(maincontext).pop();
                     }
 
-                  }else{
-                    print('image = null');
-                  }
+                  // }else{
+                  //   print('image = null');
+                  // }
                   // Get.back();
                 },
               ),

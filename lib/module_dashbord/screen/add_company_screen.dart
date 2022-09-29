@@ -15,7 +15,6 @@ import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_company_reque
 import 'package:my_kom_dist_dashboard/module_map/models/address_model.dart';
 import 'package:my_kom_dist_dashboard/module_upload/upload_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_upload/widgets/choose_photo_source_dialog.dart';
-import 'package:my_kom_dist_dashboard/utils/size_configration/size_config.dart';
 
 class AddCompanyScreen extends StatefulWidget {
   const AddCompanyScreen({Key? key}) : super(key: key);

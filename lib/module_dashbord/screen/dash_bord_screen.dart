@@ -48,7 +48,7 @@ DrawerHeader(
   child:      Column(
   children: [
         Container(
-      child: Image.asset('assets/new_logo.png',height:SizeConfig.screenHeight * 0.1,),
+      child: Image.asset('assets/new_logo.png',height:SizeConfig.screenHeight * 0.06,),
     ),
     FutureBuilder<AppUser>(
         future: AuthService().getCurrentUser(),
@@ -66,7 +66,7 @@ DrawerHeader(
                child: CircleAvatar(
                  radius: 15,
                  backgroundColor: Colors.white,
-                 child: Icon(Icons.person , size: 18,color: Colors.black87,),
+                 child: Icon(Icons.person , size: 16,color: Colors.black87,),
                ),
              ),
 
@@ -74,10 +74,10 @@ DrawerHeader(
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   SizedBox(height: 12,),
-                   Text(_user.user_name,style: TextStyle(fontSize: 12.0 , color: Colors.white , fontWeight: FontWeight.w700)),
+                   SizedBox(height: 8,),
+                   Text(_user.user_name,style: TextStyle(fontSize: 10.0 , color: Colors.white , fontWeight: FontWeight.w700)),
                    SizedBox(height: 3,),
-                   Text(_user.email,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12.0, color: Colors.white , fontWeight: FontWeight.w700),),
+                   Text(_user.email,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 10.0, color: Colors.white , fontWeight: FontWeight.w700),),
                  ],
                ),
              ),

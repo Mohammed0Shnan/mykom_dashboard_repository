@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/company_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/services/DashBoard_services.dart';
 
@@ -35,8 +36,26 @@ class StoreCompanyDetailBloc extends Bloc<StoreCompanyDetailEvent, StoreCompanyD
   }
 
   void updateCompanyState(String companyId , bool newState) {
+    EasyLoading.show();
     _service.updateCompanyState(companyId:companyId,newState:newState).then((value) {
+      if(value){
+        EasyLoading.showSuccess('Updated successfully!!');
+      }else{
+        EasyLoading.showError('Updated Error');
+      }
       // esay loading widget here
+    });
+  }
+
+  void deleteCompany(String companyId) {
+    EasyLoading.show();
+    _service.deleteCompanyById(companyId:companyId).then((value) {
+
+      if(value){
+        EasyLoading.showSuccess('Deleted successfully!!');
+      }else{
+        EasyLoading.showError('Deleted Error');
+      }
     });
   }
 

@@ -6,8 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_kom_dist_dashboard/consts/colors.dart';
 import 'package:my_kom_dist_dashboard/module_authorization/screens/widgets/top_snack_bar_widgets.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/add_advertisement_bloc.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/bloc/add_company1_bloc.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/bloc/add_product_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/all_store_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/company_store_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/bloc/products_company_bloc.dart';
@@ -18,8 +16,6 @@ import 'package:my_kom_dist_dashboard/module_dashbord/models/company_model.dart'
 import 'package:my_kom_dist_dashboard/module_dashbord/models/product_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/store_model.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/models/zone_models.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_company_request.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_product_request.dart';
 import 'package:my_kom_dist_dashboard/module_map/models/address_model.dart';
 import 'package:my_kom_dist_dashboard/module_upload/upload_bloc.dart';
 import 'package:my_kom_dist_dashboard/module_upload/widgets/choose_photo_source_dialog.dart';

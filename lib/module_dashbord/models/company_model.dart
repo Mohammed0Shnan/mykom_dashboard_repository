@@ -4,12 +4,13 @@ class CompanyModel {
   late final String id;
   late final String storeId;
   late final String name;
+  late final String name2;
   late String description;
   late bool available;
   late String imageUrl;
   late List<ProductModel> products;
 
-  CompanyModel({required this.id, required this.name, required this.imageUrl,required this.description});
+  CompanyModel({required this.id, required this.name,required this.name2, required this.imageUrl,required this.description});
 
   CompanyModel.fromJson(Map<String, dynamic> map) {
     this.id = map['id'];

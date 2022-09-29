@@ -62,8 +62,8 @@ class ImageUploadService {
   Future getImageFromGallery(ImageSource imageSource) async {
     String? _path;
     try {
-      var pickedImage = await ImagePicker().pickImage(source: imageSource);
-      _path = pickedImage!.path;
+      var pickedImage = await FilePicker.platform.pickFiles(); //await ImagePicker().pickImage(source: imageSource);
+      _path =await pickedImage!.files.first.name;
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());
     }

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_kom_dist_dashboard/module_dashbord/models/store_model.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/requests/add_company_request.dart';
+import 'package:my_kom_dist_dashboard/module_dashbord/requests/update_company_request.dart';
 import 'package:my_kom_dist_dashboard/module_dashbord/services/DashBoard_services.dart';
 
 class AddCompanyBloc extends Bloc<AddCompanyEvent, AddCompanyStates> {
@@ -32,6 +33,18 @@ class AddCompanyBloc extends Bloc<AddCompanyEvent, AddCompanyStates> {
         this.add(AddCompanyErrorEvent(message: 'Error In Fetch Data !!'));
       }
     });
+  }
+
+  void updateCompany(String id, CompanyRequest updateRequest) {
+    EasyLoading.show();
+    _service.updateCompany(id,updateRequest).then((value) {
+      if(value){
+        EasyLoading.showSuccess('Updated Successfully');}
+        else{
+          EasyLoading.showError('Error in Update');
+      }
+      }
+    );
   }
 
 
